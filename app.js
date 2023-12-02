@@ -1,10 +1,18 @@
 import express from "express";
-import dotenv from "dotenv";
 import bodyParser from "body-parser";
-import { getAllProducts, getProductById, createProduct, deleteProductById } from "./database.js";
-dotenv.config();
+import cors from "cors"
+import { Product, ProductDetails } from "./database.js";
+
 
 const app = express();
+
+const corsOptions = {
+  origin: "http://localhost:4200", // replace with your allowed origin(s)
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // enable credentials (cookies, HTTP authentication) cross-origin
+};
+
+app.use(cors(corsOptions))
 
 app.use(bodyParser.json());
 app.use(
@@ -14,17 +22,21 @@ app.use(
 );
 
 app.get("/products", async (req, res) => {
-  const products = await getAllProducts();
+  const products = await Product.findAll();
   res.send(products);
 });
 
 app.delete("/products/:id", async (req,res)=>{
-    const products = await deleteProductById(req.params.id);
+    const products = await Product.destroy({
+      where: {
+        id: req.params.id
+      },
+    });
     res.sendStatus(200);
 })
 
 app.get("/products/:id", async (req, res) => {
-  const products = await getProductById(req.params.id);
+  const products = await Product.findByPk(req.params.id);
   if(products.length>0){
       res.send(products);
   }
@@ -36,7 +48,10 @@ app.get("/products/:id", async (req, res) => {
 app.post("/products", async (req,res)=>{
     console.log(req.body);
     const { productName, imageUrl, description, price, remainingQty, altImageText } = req.body
-    const product = await createProduct(productName,imageUrl,description,price,remainingQty,altImageText)
+    const product = await Product.create({
+      product_name: productName,
+      
+    });
     res.sendStatus(201)
 })
 
