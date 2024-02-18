@@ -4,7 +4,7 @@ import { Sequelize } from "sequelize";
 dotenv.config();
 
 const sequelize = new Sequelize({
-  database: process.env.DATABASE,
+  database: process.env.PRODUCT_DATABASE,
   username: process.env.USER,
   password: process.env.PASSWORD,
   host: process.env.HOST,
@@ -82,6 +82,43 @@ export const ProductDetails = sequelize.define("product_details", {
 });
 
 
+export const Users = sequelize.define("user_details", {
+  id: {
+    type: Sequelize.UUID,
+    defaultValue: Sequelize.UUIDV4,
+    allowNull: false,
+    primaryKey: true,
+  },
+  first_name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  last_name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  DOB: {
+    type: Sequelize.DATE,
+    allowNull: false,
+  },
+  createdAt: {
+    type: Sequelize.DATE,
+    defaultValue: sequelize.NOW,
+    set(value) {
+      return value.toISOString().replace(/\..+/g, "");
+    },
+    name: "createdAt",
+    field: "created_at",
+  },
+  updatedAt: {
+    type: Sequelize.DATE,
+    defaultValue: sequelize.NOW,
+    set(value) {
+      return value.toISOString().replace(/\..+/g, "");
+    },
+    field: "updated_at",
+  },
+});
 
 
 
