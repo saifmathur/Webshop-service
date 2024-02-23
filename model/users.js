@@ -43,7 +43,7 @@ export const Users = sequelize.define("users", {
       return value.toISOString().replace(/\..+/g, "");
     },
     name: "createdAt",
-    field: "created_at",
+    field: "createdAt",
   },
   updatedAt: {
     type: Sequelize.DATE,
@@ -51,7 +51,11 @@ export const Users = sequelize.define("users", {
     set(value) {
       return value.toISOString().replace(/\..+/g, "");
     },
-    field: "updated_at",
+    field: "updatedAt",
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false,
   },
 });
 

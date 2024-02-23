@@ -37,7 +37,11 @@ export const Product = sequelize.define("products", {
   remainingQty: {
     type: Sequelize.INTEGER,
     allowNull: false,
-  }
+  },
+  alt_image_text: {
+    type: Sequelize.STRING,
+    allowNull: true,
+  },
 });
 
 export const ProductDetails = sequelize.define("product_details", {
@@ -57,7 +61,7 @@ export const ProductDetails = sequelize.define("product_details", {
   },
   banner_image: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true,
   },
   image1_url: {
     type: Sequelize.STRING,
@@ -82,43 +86,7 @@ export const ProductDetails = sequelize.define("product_details", {
 });
 
 
-export const Users = sequelize.define("user_details", {
-  id: {
-    type: Sequelize.UUID,
-    defaultValue: Sequelize.UUIDV4,
-    allowNull: false,
-    primaryKey: true,
-  },
-  first_name: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  last_name: {
-    type: Sequelize.STRING,
-    allowNull: false,
-  },
-  DOB: {
-    type: Sequelize.DATE,
-    allowNull: false,
-  },
-  createdAt: {
-    type: Sequelize.DATE,
-    defaultValue: sequelize.NOW,
-    set(value) {
-      return value.toISOString().replace(/\..+/g, "");
-    },
-    name: "createdAt",
-    field: "created_at",
-  },
-  updatedAt: {
-    type: Sequelize.DATE,
-    defaultValue: sequelize.NOW,
-    set(value) {
-      return value.toISOString().replace(/\..+/g, "");
-    },
-    field: "updated_at",
-  },
-});
+
 
 
 
