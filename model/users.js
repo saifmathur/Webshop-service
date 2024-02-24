@@ -38,20 +38,25 @@ export const Users = sequelize.define("users", {
   },
   createdAt: {
     type: Sequelize.DATE,
-    defaultValue: sequelize.NOW,
-    set(value) {
-      return value.toISOString().replace(/\..+/g, "");
-    },
+    defaultValue: Sequelize.NOW,
+    // set(value) {
+    //   return value.toISOString().replace(/\..+/g, "");
+    // },
     name: "createdAt",
     field: "createdAt",
   },
   updatedAt: {
     type: Sequelize.DATE,
-    defaultValue: sequelize.NOW,
-    set(value) {
-      return value.toISOString().replace(/\..+/g, "");
-    },
+    defaultValue: Sequelize.NOW,
+    // set(value) {
+    //   return value.toISOString().replace(/\..+/g, "");
+    // },
     field: "updatedAt",
+  },
+  active: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    defaultValue: true,
   },
   password: {
     type: Sequelize.STRING,
@@ -65,6 +70,10 @@ export const UserDetails = sequelize.define("user_details", {
     defaultValue: Sequelize.UUIDV4,
     allowNull: false,
     primaryKey: true,
+  },
+  email: {
+    type: Sequelize.STRING,
+    allowNull: true,
   },
   user_id: {
     type: Sequelize.UUID,
@@ -89,20 +98,20 @@ export const UserDetails = sequelize.define("user_details", {
   },
   createdAt: {
     type: Sequelize.DATE,
-    defaultValue: sequelize.NOW,
-    set(value) {
-      return value.toISOString().replace(/\..+/g, "");
-    },
+    defaultValue: Sequelize.NOW,
+    // set(value) {
+    //   return value.toISOString().replace(/\..+/g, "");
+    // },
     name: "createdAt",
-    field: "created_at",
+    field: "createdAt",
   },
   updatedAt: {
     type: Sequelize.DATE,
-    defaultValue: sequelize.NOW,
-    set(value) {
-      return value.toISOString().replace(/\..+/g, "");
-    },
-    field: "updated_at",
+    defaultValue: Sequelize.NOW,
+    // set(value) {
+    //   return value.toISOString().replace(/\..+/g, "");
+    // },
+    field: "updatedAt",
   },
 });
 
